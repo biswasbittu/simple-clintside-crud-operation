@@ -1,17 +1,24 @@
-
-
-import './App.css'
+import "./App.css";
 function App() {
-
-  const handleAddUser = e=>{
+  const handleAddUser = (e) => {
     e.preventDefault();
-//  console.log("form Work succefully");
- const form =e.target;
- const name =form.name.value;
- const email =form.email.value;
- const users={name,email}
- console.log(users);
-  }
+    //  console.log("form Work succefully");
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const users = { name, email };
+    console.log(users);
+
+    fetch(`http://localhost:5000/users`,{
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+      },
+      body:JSON.stringify(users)
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
   return (
     <>
@@ -27,4 +34,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
